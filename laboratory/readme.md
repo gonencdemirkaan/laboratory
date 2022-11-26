@@ -13,6 +13,7 @@ Projeyi calistirmak icin, Komut satından proje dizinine gidip;
 .\mvnw spring-boot:run
 ```
 
+
 Çalıştırmak yeterli olacaktır.
 
 
