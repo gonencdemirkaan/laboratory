@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Rapor</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+    <!-- JavaScript Bundle with Popper -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2"
+            crossorigin="anonymous"></script>
+    <style>
+        .help-block {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="container">
+        <form th:action="@{/reports/create}" th:object="${report}" method="post">
+            <input hidden th:field="*{id}">
+            <table class="table form-input">
+                <thead></thead>
+                <tbody>
+                <tr>
+                    <td>Fotoğraf url</td>
+                    <td>
+                        <input class="text-input form-control" type="text" id="image"
+                               th:field="*{image}"/></td>
+                </tr>
+                <tr>
+                    <td>Isim</td>
+                    <td><input class="text-input form-control" type="text" id="name"
+                               th:field="*{name}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Soyisim</td>
+                    <td><input class="text-input form-control" type="text" id="surname"
+                               th:field="*{surname}" required/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Kimlik numarasi</td>
+                    <td><input class="text-input form-control" type="text" id="identity"
+                               th:field="*{identity}" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tani Basligi</td>
+                    <td><textarea rows="1" class="text-input form-control" id="diagnosisTitle"
+                                  th:field="*{diagnosisTitle}" required></textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Tani Detaylari</td>
+                    <td><textarea rows="5" class="text-input form-control" id="diagnosisDescription"
+                                  th:field="*{diagnosisDescription}" required></textarea>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Rapor Zamani</td>
+                    <td><input class="text-input form-control" type="datetime-local" id="reportDate"
+                               th:field="*{reportDate}" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Laborant</td>
+                    <td><select th:field="*{laborant}">
+                        <option th:each="laborant : ${laborants}"
+                                th:text="${laborant.name}"
+                                th:value="${laborant.id}">
+                    </select>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td></td>
+                    <td><input class="btn btn-primary" type="submit" id="submit"
+                               value="Gonder">
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+
+</body>
+</html>
+

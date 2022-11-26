@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="ISO-8859-1">
+    <title>Rapor Listesi</title>
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+          integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+
+</head>
+
+<style>
+    table {
+        table-layout: fixed;
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse;
+        text-align: center;
+    }
+
+    td {
+        min-width: 250px;
+        text-align: center;
+        vertical-align: middle !important;
+    }
+</style>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark" style="margin-bottom: 2em">
+    <div class="navbar-collapse collapse w-100 dual-collapse2 order-2 order-md-2 text-center"
+         style="padding-left: 40%;">
+        <ul class="navbar-nav mr-auto text-center" style="">
+            <li class="nav-item"><a class="nav-link" th:href="@{/reports}">Anasayfa</a></li>
+        </ul>
+    </div>
+</nav>
+
+
+<div>
+    <div class="container">
+
+        <form class="input-group mb-3" th:action="@{/reports/search}" method="post" th:object="${search}">
+            <input class="form-control" type="text" th:field="*{query}" placeholder="Search">
+            <div class="input-group-append">
+                <span><input class="btn btn-primary"
+                             type="submit" value="Search"/></span>
+            </div>
+        </form>
+
+        <div style="width: 100%; text-align: center"><a th:href="@{/reports/create}" class="btn btn-primary btn-sm mb-3">
+            Rapor Ekle </a></div>
+    </div>
+
+
+    <table border="1" class="table table-striped table-responsive-md">
+        <thead>
+        <tr>
+            <th>Fotograf</th>
+            <th>Isim - Soyisim</th>
+            <th>Tc Numarasi</th>
+            <th>Tani Basligi</th>
+            <th>Tani Detaylari</th>
+            <th>Gorevli</th>
+            <th>Islemler</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="report : ${reports}">
+            <td><img th:src="${report.image}" width="200"></td>
+            <td><span class="h5" th:text="${report.name}"/><br>
+                <span th:text="${report.surname}"/>
+            </td>
+            <td> <span th:text="${report.identity}"></span></td>
+            <td> <span th:text="${report.diagnosisTitle}"></span></td>
+            <td> [(${report.diagnosisDescription})]</td>
+            <td> <span th:text="${report.laborant.name}"></span></td>
+            <td><a th:href="@{/reports/delete/{id}(id=${report.id})}" class="btn btn-primary">Sil</a>
+                <a th:href="@{/reports/{id}(id=${report.id})}" class="btn btn-info">Güncelle</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+</body>
+
+</html>
